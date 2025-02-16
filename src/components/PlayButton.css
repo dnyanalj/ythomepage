@@ -1,7 +1,5 @@
 /* PlayButton.css */
 button {
-    background-color: #ff4757; /* Red color */
-    color: white; /* White text */
     border: none;
     padding: 10px 20px;
     font-size: 16px;
@@ -11,11 +9,15 @@ button {
     transition: 0.3s ease-in-out;
   }
   
-  button:hover {
-    background-color: black; /* Darker red on hover */
-  }
-  
   button:active {
     transform: scale(0.95); /* Slight shrink effect */
   }
-  
+
+  button.darkMode{
+    background-color: yellow; /* Red color */
+    color: black; /* White text */
+  }
+  button.lightMode{
+    background-color: black; /* Red color */
+    color: yellow; /* White text */
+  }

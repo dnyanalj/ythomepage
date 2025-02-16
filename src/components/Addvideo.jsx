@@ -1,21 +1,25 @@
-import React, { useState,useEffect} from 'react'
+import React, { useState,useEffect, useContext} from 'react'
+import VideoDispatchContext from '../context/VideoDispatchContext';
 let emptyState={
         thumbNailImg:"https://placebear.com/1280/720",
         channelName:"Dnyanal Jathar",
         views:"200k",
         time:"1"
 }
-function Addvideo({dispatch,editableVideo,updateVideo}) {
+function Addvideo({editableVideo}) {
 
     const [video,setVideo]=useState(emptyState);
-    
+    const dispatch=useContext(VideoDispatchContext);
+
     function handleSubmit(e){
         e.preventDefault();
         // console.log(video);
         if(editableVideo){
+            // updateVideo(video); rather than this we will use dispatch
             dispatch({type:'UPDATE',payload:video})
         }else{
-            dispatch({type:'ADD', payload:video})
+            // addVideo(video);
+            dispatch({type:'ADD',payload:video})
         }
         setVideo(emptyState);
     }
