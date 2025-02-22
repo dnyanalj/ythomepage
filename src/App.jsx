@@ -11,7 +11,6 @@ import VideoDispatchContext from "./context/VideoDispatchContext";
 
 
 function App() {
-  
   const [mode, setMode] = useState("lightMode");
 
   console.log("app render");
@@ -37,6 +36,8 @@ function App() {
 
   function videoReducer(videos, action) {
     switch (action.type) {
+      case "LOAD":
+        return action.payload;
       case "ADD":
         return [...videos, { ...action.payload, id: videos.length + 1 }];
       case "DELETE":
@@ -100,7 +101,10 @@ function App() {
     <ThemeContext.Provider value={mode}>
       <VideosContext.Provider value={videos}>
         <VideoDispatchContext.Provider value={dispatch}>
+              
             <div className={`App ${mode}`}>
+              
+              <Counter></Counter>
               {/* <Thumbnail {...homepage[0]}></Thumbnail>
               <Thumbnail {...homepage[1]}></Thumbnail> */}
               {/* <button onClick={()=>{
@@ -139,7 +143,6 @@ function App() {
                 // the context api
               ></VideoList>
 
-              <Counter></Counter>
               <ShowTime></ShowTime>
             </div>
         </VideoDispatchContext.Provider>

@@ -1,6 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './Thumbnail.css';
 import ThemeContext from '../context/ThemeContext';
+
+import useVideoDispatch from '../hooks/VideoDispatch'
 import VideoDispatchContext from '../context/VideoDispatchContext';
 
 function Thumbnail({thumbNailImg,id,channelName,views,time,children,editVideo}) {
@@ -8,7 +10,24 @@ function Thumbnail({thumbNailImg,id,channelName,views,time,children,editVideo}) 
     let channelJSX=<div className='channel'>{channelName}</div>
 
     const theme=useContext(ThemeContext);
+
     const dispatch=useContext(VideoDispatchContext);
+    // hyachya jagi custom hook 
+    // const dispatch=useVideoDispatch();
+
+
+  
+
+    // useEffect(()=>
+    //   {
+    //     let it=setInterval(()=>{console.log('video playing',id);
+    //     },3000)
+    //     return ()=>{
+    //       clearInterval(it);
+    //     }
+    //   },[id]);
+
+
   return (
     <div>
         <button className="close" onClick={()=>{
@@ -21,7 +40,7 @@ function Thumbnail({thumbNailImg,id,channelName,views,time,children,editVideo}) 
         </div>
 
         <div className={`channelName ${theme}`}>{channelName}</div>
-              {channelJSX}
+              
         <div className={`views ${theme} `}>{views}</div>
         <div className={`time ${theme} `}>{time}</div>
         {children}

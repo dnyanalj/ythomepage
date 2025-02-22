@@ -1,15 +1,28 @@
-import React, { useState,useEffect, useContext} from 'react'
+import React, { useState,useEffect, useContext, useRef} from 'react';
 import VideoDispatchContext from '../context/VideoDispatchContext';
+import useVideoDispatch from '../hooks/VideoDispatch'
+
 let emptyState={
         thumbNailImg:"https://placebear.com/1280/720",
         channelName:"Dnyanal Jathar",
         views:"200k",
         time:"1"
 }
+
 function Addvideo({editableVideo}) {
 
+    
     const [video,setVideo]=useState(emptyState);
-    const dispatch=useContext(VideoDispatchContext);
+    
+    const inputRef=useRef(null);
+
+    // const dispatch=useContext(VideoDispatchContext);
+    
+    // now instead of calling dispatch function with the useContext we will
+    // call it with custom hook .........
+    
+    // bhai first time using custom hook
+    const dispatch=useVideoDispatch();
 
     function handleSubmit(e){
         e.preventDefault();
@@ -40,8 +53,11 @@ function Addvideo({editableVideo}) {
         if(editableVideo != null){
             setVideo(editableVideo);
         }
+        // useRef practice
+        // inputRef.current.value="demo"
+        // inputRef.current.focus()
     },[editableVideo]);
-
+    
 return (
     <div>
         <form action="">
@@ -58,13 +74,17 @@ return (
                 placeholder='channelName'  
                 value={video.channelName}></input>
             <input 
+                ref={inputRef}
                 type="text" 
-                name='views' 
+                name='views'
+                className='viewsClass' 
                 onChange={handleChange} 
                 placeholder='views'></input>
+
             <button onClick={handleSubmit}>
                 {editableVideo?'Edit':'Add'}submit
             </button>
+            {/* <button onClick={()=>{ inputRef.current.value="demo"}}>focus</button> */}
         </form>
     </div>
 )}
